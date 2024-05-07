@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ecomm-cm 
+data:
+  BATCH: "55"
+  ENVIRONMENT: "dev"
+  MONGO_URL: "mongo.crp.cc"
+  APP: ecomm  
+
+--- 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-4 
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx:latest
+    envFrom: 
+      - configMapRef: 
+          name: ecomm-cm 
+
+
+# Let's say you have configMap created with a=10 , env=dev , passCode=123 whose name is pass-cm.
+
+# Now this ConfigMap is used or injected into 10+ resources and after injection you have update the value of the configmap pass-cm  
+# with passCode=1487.
+
+# This update of configMap will not have any impact on the pods tha are using. To get the new values, you need to restart the pod.
