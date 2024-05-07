@@ -3,9 +3,9 @@ kind: ConfigMap
 metadata:
   name: ecomm-cm 
 data:
-  BATCH: "55"
+  Age: "23"
   ENVIRONMENT: "dev"
-  MONGO_URL: "mongo.crp.cc"
+  Koushik: Ramesh
   APP: ecomm  
 
 --- 
