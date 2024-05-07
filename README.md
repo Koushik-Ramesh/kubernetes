@@ -12,7 +12,7 @@
 ### Do we run Containers directly on the top of Kubernetes Clusters ?
     We don't run containers directly on the top of Kubernetes Clusters. Instead we use something called as POD's.
     POD's are the smallest units in Kubernetes. POD is a wrapper to your container which means One Pod holds one or more than one container.
-    
+
 ### Can a POD in kubernetes runs more than one container ?
     YES! If two containers are working closely together, then we can use the multi-container pods, which was solved by K8 and that's main advantage.
 
@@ -46,7 +46,8 @@
 
         1) Imperative   [ Using commands       : This is not recommended approach ]
         2) Declarative  [ Recommented Apporach : Everything will be in code using YAML ]
-    kubectl apply -f vs create -f ?
+
+### kubectl apply -f vs create -f ?
     Both apply and create has the capabilitiy to create the resources mentioned in the mainfest.yaml
 
     create just creates the resources if the resource is not available whilst apply even creates the resources of they are not available.
