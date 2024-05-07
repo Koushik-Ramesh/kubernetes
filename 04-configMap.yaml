@@ -4,7 +4,7 @@ metadata:
   name: ecomm-cm 
 data:
   Age: "23"
-  ENVIRONMENT: "dev"
+  ENVIRONMENT: "development"
   Koushik: Ramesh
   APP: ecomm  
 
