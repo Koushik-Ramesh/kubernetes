@@ -6,8 +6,6 @@ spec:
   containers:
   - name: nginx-container
     image: nginx:latest
-  - name: busybox-container
-    image: busybox
     env: 
       - name: Koushik
         value: Ramesh
