@@ -12,7 +12,8 @@
 ### Do we run Containers directly on the top of Kubernetes Clusters ?
     We don't run containers directly on the top of Kubernetes Clusters. Instead we use something called as POD's.
     POD's are the smallest units in Kubernetes. POD is a wrapper to your container which means One Pod holds one or more than one container.
-    Can a POD in kubernetes runs more than one container ?
+    
+### Can a POD in kubernetes runs more than one container ?
     YES! If two containers are working closely together, then we can use the multi-container pods, which was solved by K8 and that's main advantage.
 
     All the containers in a pod will have common network stack and storage which results in high performance for apps that needs common network storage.
@@ -112,4 +113,4 @@ Sets In Kubernetes :
     How this upgrade really happens in the background ?
 
         1) It goes by rolling update.
-        2) 1.26 nodes comes up, deltes one node.
+        2) 1.26 nodes comes up, deletes one node.
