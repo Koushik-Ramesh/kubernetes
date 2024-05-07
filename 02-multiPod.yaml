@@ -8,3 +8,5 @@ spec:
     image: nginx:latest
   - name: busybox-container
     image: busybox
+    command: ["sleep" , "10000"]
+    
