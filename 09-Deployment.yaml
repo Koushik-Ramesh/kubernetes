@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable : 20
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+
+# Cluster IP Svc
+# --- 
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: nginx-svc
+# spec:
+#   selector:
+#     app: nginx
+#   ports:
+#     - protocol: TCP
+#       port: 80
+#       targetPort: 80
+
+
+# Load Balancer Svc
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-alb-svc
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+
+--- 
+# NodePort SVc
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: my-service
+# spec:
+#   type: NodePort
+#   selector:
+#     appp: nginx
+#   ports:
+#     - port: 80                
+#       targetPort: 80
+#       # will allocate a port from a range (default: 30000-32767)
+#       nodePort: 30007      # Port number which would be reaching the k8 node

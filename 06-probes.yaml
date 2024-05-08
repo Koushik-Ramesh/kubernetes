@@ -1,0 +1,53 @@
+# Probes in kubernetes are typically health checks
+# Health Checks are of 3 types on kubernetes 
+  # 1) Liveliness Probes : Many applications running for long periods of time eventually transition to broken states, and cannot recover except by being restarted. Kubernetes provides liveness probes to detect and remedy such situations. 
+  # 2) Readiness Probes  : Once the pod comes up, traffic will only be sent if the POD is ready to accept the traffic. 
+  # 3) Startup Probes    :
+
+# When the probes fails, kubernetes [kubelet] is going to restart the pod.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: liveness-exec
+spec:
+  containers:
+  - name: liveness
+    image: registry.k8s.io/busybox
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy; sleep 30; rm -f /tmp/healthy; sleep 600
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 5
+      periodSeconds: 5 
+
+--- 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: goproxy-readinesprobe
+  labels:
+    app: goproxy
+spec:
+  containers:
+  - name: goproxy
+    image: registry.k8s.io/goproxy:0.1
+    ports:
+    - containerPort: 8080
+    readinessProbe:
+      tcpSocket:
+        port: 8080
+      initialDelaySeconds: 15
+      periodSeconds: 10
+    livenessProbe:
+      tcpSocket:
+        port: 8080
+      initialDelaySeconds: 15
+      periodSeconds: 10
